@@ -22,7 +22,7 @@
   (if (pair? manifests)
       (begin
         (let ((manifest (read-manifest (string-append
-                                        "/home/daviwil/.dotfiles/.files/.config/guix/manifests/"
+                                        "/home/Ez3/src/Guix/configurations/.files/.config/guix/manifests/"
                                         (symbol->string (car manifests))
                                         ".scm"))))
           ;; (pretty-print (eval manifest (current-module)))

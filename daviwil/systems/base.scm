@@ -18,21 +18,19 @@
 
 (define-public base-operating-system
   (operating-system
-   (host-name "hackstock")
-   (timezone "Europe/Athens")
-   (locale "en_US.utf8")
+   (host-name "Regina")
+   (timezone "Europe/Lisbon")
+   (locale "es_AR.utf8")
 
    ;; Use non-free Linux and firmware
    (kernel linux)
    (firmware (list linux-firmware))
    (initrd microcode-initrd)
 
-   ;; Additional kernel modules
+   ;; Loopback devices for video streaming and webcam simulation
    (kernel-loadable-modules (list v4l2loopback-linux-module))
 
-   ;; Choose US English keyboard layout.  The "altgr-intl"
-   ;; variant provides dead keys for accented characters.
-   (keyboard-layout (keyboard-layout "us" "altgr-intl" #:model "thinkpad"))
+   (keyboard-layout (keyboard-layout "us" "altgr-intl"))
 
    ;; Use the UEFI variant of GRUB with the EFI System
    ;; Partition mounted on /boot/efi.
@@ -52,20 +50,20 @@
                   %base-file-systems))
 
    (users (cons (user-account
-                 (name "daviwil")
-                 (comment "David Wilson")
+                 (name "Ez3")
+                 (comment "Ezequiel Birman")
                  (group "users")
-                 (home-directory "/home/daviwil")
+                 (home-directory "/home/Ez3")
                  (supplementary-groups '("wheel"  ;; sudo
                                          "netdev" ;; network devices
                                          "kvm"
                                          "tty"
                                          "input"
                                          "docker"
-                                         "realtime" ;; Enable realtime scheduling
+                                         "realtime" ;; enable realtime scheduling
                                          "lp"       ;; control bluetooth devices
-                                         "audio"    ;; control audio devices
-                                         "video"))) ;; control video devices
+                                         "audio"
+                                         "video")))
 
                 %base-user-accounts))
 
@@ -120,7 +118,7 @@
                             ;; (default-session-command (greetd-wlgreet-sway-session
                             ;;                           (sway-configuration
                             ;;                            (plain-file "sway-greet.conf"
-                            ;;                                        "output * bg /home/daviwil/.dotfiles/backgrounds/samuel-ferrara-uOi3lg8fGl4-unsplash.jpg fill\n"))))
+                            ;;                                        "output * bg /home/Ez3/.dotfiles/backgrounds/samuel-ferrara-uOi3lg8fGl4-unsplash.jpg fill\n"))))
                             )
 
                            ;; Set up remaining TTYs for terminal use
@@ -258,8 +256,8 @@
 (define* (system-config #:key system home)
   (operating-system
     (inherit system)
-    (timezone "Europe/Athens")
-    (locale "en_US.utf8")
+    (timezone "Europe/Lisbon")
+    (locale "es_AR.utf8")
 
    ;; Use non-free Linux and firmware
    (kernel linux)
@@ -267,15 +265,10 @@
                  (list linux-firmware)))
    (initrd microcode-initrd)
 
-   ;; Additional kernel modules
    (kernel-loadable-modules (list v4l2loopback-linux-module))
 
-   ;; Choose US English keyboard layout.  The "altgr-intl"
-   ;; variant provides dead keys for accented characters.
    (keyboard-layout (keyboard-layout "us" "altgr-intl" #:model "thinkpad"))
 
-   ;; Use the UEFI variant of GRUB with the EFI System
-   ;; Partition mounted on /boot/efi.
    (bootloader (bootloader-configuration
                 (bootloader grub-efi-bootloader)
                 (targets '("/boot/efi"))
@@ -287,13 +280,13 @@
    ;;   sudo mkswap /swapfile
    ;;   sudo chmod 600 /swapfile
    (swap-devices (list (swap-space
-                        (target "/swapfile"))))
+                        (target (file-system-label "swap")))))
 
    (users (cons (user-account
-                 (name "daviwil")
-                 (comment "David Wilson")
+                 (name "Ez3")
+                 (comment "Ezequiel Birman")
                  (group "users")
-                 (home-directory "/home/daviwil")
+                 (home-directory "/home/Ez3")
                  (supplementary-groups '("wheel"  ;; sudo
                                          "netdev" ;; network devices
                                          "kvm"
@@ -302,8 +295,8 @@
                                          "docker"
                                          "realtime" ;; Enable realtime scheduling
                                          "lp"       ;; control bluetooth devices
-                                         "audio"    ;; control audio devices
-                                         "video"))) ;; control video devices
+                                         "audio"
+                                         "video")))
 
                 %base-user-accounts))
 
@@ -337,7 +330,7 @@
               (list
                ;; Set up my home configuration
                (service guix-home-service-type
-                        `(("daviwil" ,home)))
+                        `(("Ez3" ,home)))
 
                ;; Seat management (can't use seatd because Wireplumber depends on elogind)
                (service elogind-service-type)

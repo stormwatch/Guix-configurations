@@ -4,9 +4,7 @@
   #:use-module (nongnu packages game-client))
 
 (define (home-games-profile-service config)
-  (list steam
-        aisleriot
-        gnome-mahjongg))
+  (list steam))
 
 (define-public home-games-service-type
   (service-type (name 'home-games)
