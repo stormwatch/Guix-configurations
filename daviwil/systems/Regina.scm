@@ -38,6 +38,8 @@
                 (bootloader grub-efi-bootloader)
                 (targets '("/boot/efi"))
                 (keyboard-layout keyboard-layout)))
+   (swap-devices (list (swap-space
+                         (target (file-system-label "swap")))))
    (file-systems (cons*
                   (file-system
                    (device (file-system-label "root"))
