@@ -56,8 +56,9 @@
         font-awesome
 
         ;; Browsers
+	firefox
         (specification->package "qtwayland@5")
-        ;qutebrowser
+        qutebrowser
         ;vimb
 
         ;; Authentication
