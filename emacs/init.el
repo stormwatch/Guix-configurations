@@ -104,19 +104,17 @@
   "A list of module symbols to load once init.el is finished.")
 
 (defvar dw/common-config-modules '(dw-auth
-                                   dw-irc
                                    dw-present
                                    dw-0x0
-                                   dw-writing
-                                   dw-workflow)
+                                   dw-writing)
   "Configuration modules most commonly used across my machines.")
 
 ;; Add configuration modules to load path
-(add-to-list 'load-path '"~/.dotfiles/emacs/modules")
+(add-to-list 'load-path '"~/src/Guix/configurations/emacs/modules")
 
 ;; Load system-specific configuration
 (let ((config-path
-       (format "~/.dotfiles/emacs/systems/%s.el" system-name)))
+       (format "~/src/Guix/configurations/emacs/systems/%s.el" system-name)))
   (if (file-exists-p config-path)
       (load-file config-path)
     (message "No per-system configuration found for %s!" system-name)))

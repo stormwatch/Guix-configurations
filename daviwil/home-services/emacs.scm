@@ -17,6 +17,7 @@
 
 (define (home-emacs-config-profile-service config)
   (list
+   ;; Themes
    emacs-doom-themes
    emacs-ef-themes
 
@@ -25,14 +26,7 @@
    emacs-buffer-env
    emacs-beframe
 
-   emacs-bluetooth
-
-   emacs-mpv
-
    emacs-ement
-
-   emacs-lua-mode
-   emacs-fennel-mode
 
    emacs-emojify
 
@@ -71,6 +65,7 @@
 
    emacs-xclip
 
+   ;; Org Mode
    emacs-org
    emacs-org-modern
    emacs-org-pomodoro
@@ -82,6 +77,7 @@
    emacs-logos
    emacs-howm
 
+   ;; Magit
    emacs-magit
    emacs-magit-todos
 
@@ -101,11 +97,6 @@
    emacs-typescript-mode
    emacs-apheleia
 
-   ;emacs-go-mode
-
-   ;emacs-rust-mode
-   ;emacs-zig-mode
-
    emacs-helpful
 
    emacs-geiser
@@ -124,9 +115,7 @@
    emacs-yasnippet-snippets
 
    emacs-smartparens
-
    emacs-rainbow-delimiters
-
    emacs-rainbow-mode
 
    emacs-posframe
@@ -165,6 +154,7 @@
 
    emacs-pulseaudio-control
 
+   ;; Docker
    emacs-docker
    emacs-dockerfile-mode))
 
