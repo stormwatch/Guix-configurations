@@ -56,7 +56,7 @@
         font-awesome
 
         ;; Browsers
-	firefox
+	(specification->package "librewolf")
         (specification->package "qtwayland@5")
         qutebrowser
         ;vimb
