@@ -115,10 +115,10 @@
                            (greetd-terminal-configuration
                             (terminal-vt "1")
                             (terminal-switch #t)
-                            ;; (default-session-command (greetd-wlgreet-sway-session
-                            ;;                           (sway-configuration
-                            ;;                            (plain-file "sway-greet.conf"
-                            ;;                                        "output * bg /home/Ez3/.dotfiles/backgrounds/samuel-ferrara-uOi3lg8fGl4-unsplash.jpg fill\n"))))
+                             (default-session-command (greetd-wlgreet-sway-session
+                                                       (sway-configuration
+                                                        (plain-file "sway-greet.conf"
+                                                                    "output * bg /home/Ez3/src/Guix/configurations/backgrounds/samuel-ferrara-uOi3lg8fGl4-unsplash.jpg fill\n"))))
                             )
 
                            ;; Set up remaining TTYs for terminal use
