@@ -4,12 +4,13 @@
   #:use-module (gnu system)
   #:use-module (gnu system nss)
   #:use-module (gnu system setuid)
+  #:use-module (gnu system privilege)
   #:use-module (nongnu packages linux)
   #:use-module (nongnu packages video)
   #:use-module (nongnu system linux-initrd)
   #:export (system-config))
 
-(use-service-modules guix admin sysctl pm nix avahi dbus desktop linux
+(use-service-modules dns guix admin sysctl pm nix avahi dbus desktop linux
                      mcron networking xorg ssh docker audio virtualization)
 
 (use-package-modules audio video nfs certs shells ssh linux bash emacs gnome
@@ -150,10 +151,11 @@
 
                ;; Give certain programs super-user access
                (simple-service 'mount-setuid-helpers
-                               setuid-program-service-type
+                               privileged-program-service-type
                                (map (lambda (program)
-                                      (setuid-program
-                                       (program program)))
+                                      (privileged-program
+                                       (program program)
+                                       (setuid? #t)))
                                     (list (file-append nfs-utils "/sbin/mount.nfs")
                                           (file-append ntfs-3g "/sbin/mount.ntfs-3g"))))
 
@@ -356,10 +358,11 @@
 
                ;; Give certain programs super-user access
                (simple-service 'mount-setuid-helpers
-                               setuid-program-service-type
+                               privileged-program-service-type
                                (map (lambda (program)
-                                      (setuid-program
-                                       (program program)))
+                                      (privileged-program
+                                       (program program)
+                                       (setuid? #t)))
                                     (list (file-append nfs-utils "/sbin/mount.nfs")
                                           (file-append ntfs-3g "/sbin/mount.ntfs-3g"))))
 
@@ -374,6 +377,14 @@
                         (bluetooth-configuration
                          (auto-enable? #t)))
                (service usb-modeswitch-service-type)
+
+               ;; Add extra hosts for local testing of web projects
+               (simple-service 'dev-hosts
+                               hosts-service-type
+                               (list (host "127.0.0.1"
+                                           "localhost"
+                                           (list "systemcrafters.local"
+                                                 "ci.systemcrafters.local"))))
 
                ;; Basic desktop system services (copied from %desktop-services)
                (service avahi-service-type)
