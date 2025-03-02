@@ -383,8 +383,7 @@
                                hosts-service-type
                                (list (host "127.0.0.1"
                                            "localhost"
-                                           (list "systemcrafters.local"
-                                                 "ci.systemcrafters.local"))))
+                                           (list "Regina.local"))))
 
                ;; Basic desktop system services (copied from %desktop-services)
                (service avahi-service-type)
