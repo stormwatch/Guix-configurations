@@ -9,11 +9,11 @@
   #:use-module (nongnu system linux-initrd)
   #:export (system-config))
 
-(use-service-modules guix admin sysctl pm nix avahi dbus cups desktop linux
+(use-service-modules guix admin sysctl pm nix avahi dbus desktop linux
                      mcron networking xorg ssh docker audio virtualization)
 
 (use-package-modules audio video nfs certs shells ssh linux bash emacs gnome
-                     networking wm fonts libusb cups freedesktop file-systems
+                     networking wm fonts libusb freedesktop file-systems
                      version-control package-management vim)
 
 (define-public base-operating-system
@@ -173,7 +173,6 @@
                (service avahi-service-type)
                (service udisks-service-type)
                (service upower-service-type)
-               (service cups-pk-helper-service-type)
                (service geoclue-service-type)
                (service polkit-service-type)
                (service dbus-root-service-type)
@@ -216,14 +215,6 @@
                         (openssh-configuration
                          (openssh openssh-sans-x)
                          (port-number 2222)))
-
-               ;; Enable printing and scanning
-               (service sane-service-type)
-               (service cups-service-type
-                        (cups-configuration
-                         (web-interface? #t)
-                         (extensions
-                          (list cups-filters))))
 
                ;; Set up the X11 socket directory for XWayland
                (service x11-socket-directory-service-type)
@@ -403,7 +394,6 @@
                (service avahi-service-type)
                (service udisks-service-type)
                (service upower-service-type)
-               (service cups-pk-helper-service-type)
                (service geoclue-service-type)
                (service polkit-service-type)
                (service dbus-root-service-type)
@@ -446,14 +436,6 @@
                         (openssh-configuration
                          (openssh openssh-sans-x)
                          (port-number 2222)))
-
-               ;; Enable printing and scanning
-               (service sane-service-type)
-               (service cups-service-type
-                        (cups-configuration
-                         (web-interface? #t)
-                         (extensions
-                          (list cups-filters))))
 
                ;; Set up the X11 socket directory for XWayland
                (service x11-socket-directory-service-type)

@@ -1,5 +1,4 @@
 (define-module (daviwil home-services emacs)
-  #:use-module (daviwil packages emacs)
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs)
   #:use-module (gnu packages emacs-xyz)
@@ -120,8 +119,6 @@
 
    emacs-posframe
    emacs-keycast
-
-   emacs-obs-websocket-el
 
    emacs-a
    emacs-request
