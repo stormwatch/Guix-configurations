@@ -192,16 +192,6 @@
                          (pam-limits-entry "@realtime" 'both 'nice -19)
                          (pam-limits-entry "@realtime" 'both 'memlock 'unlimited)))
 
-               ;; Configure v4l2loopback module for virtual cameras
-               ;; See also: https://stackoverflow.com/a/66072635
-               ;;           https://github.com/umlaeute/v4l2loopback
-               ;; (service kernel-module-loader-service-type '("v4l2loopback"))
-               ;; (simple-service 'v4l2loopback-config etc-service-type
-               ;;                 (list `("modprobe.d/v4l2loopback.conf"
-               ;;                         ,(plain-file "v4l2loopback.conf"
-               ;;                                      "options v4l2loopback devices=1 video_nr=2 exclusive_caps=1 card_label=\"OBS Virtual Camera\""))))
-
-
                ;; Enable Docker containers and virtual machines
                (service containerd-service-type)
                (service docker-service-type)
@@ -265,11 +255,6 @@
                 (targets '("/boot/efi"))
                 (keyboard-layout keyboard-layout)))
 
-   ;; Set up swap space
-   ;; NOTE: Create it first -
-   ;;   sudo dd if=/dev/zero of=/swapfile bs=1MiB count=10240
-   ;;   sudo mkswap /swapfile
-   ;;   sudo chmod 600 /swapfile
    (swap-devices (list (swap-space
                         (target (file-system-label "swap")))))
 
